@@ -4,7 +4,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Multi Step Form",
+  title: "Frontend Mentor | Multi-step form",
   description: "FrontEnd Mentor Challenge by Martin Otero",
 };
 
