@@ -6,11 +6,11 @@ export default function Form() {
   const [name, setName] = useState("");
 
   return (
-    <div className="bg-slate-100 flex flex-row rounded-xl shadow-xl w-[1200px] h-[700px]">
-      <div className="flex flex-col justify-center items-center w-[300px] h-[700]">
+    <div className="bg-slate-100 flex flex-row rounded-xl shadow-xl w-[1100px] h-[600px]">
+      <div className="relative flex flex-col justify-center items-center w-[300px] h-[600px]">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="w-[274px] h-[568px] fill-none"
+          className="w-[274px] h-[650px] fill-none"
           viewBox="0 0 274 568"
         >
           <rect className="w-[274px] h-[568px] fill-[#483EFF]" rx="10" />
@@ -50,6 +50,28 @@ export default function Form() {
             />
           </g>
         </svg>
+        <div className="absolute z-30 w-[200px] h-[500px] bg-red-800 text-white">
+          <div className="flex flex-row w-[200px] h-[40px] items-center mb-8">
+            <div className="rounded-full border-2 border-white h-[40px] w-[40px] text-center font-semibold p-1 ">
+              {" "}
+              1{" "}
+            </div>
+            <div className="text-sm ml-4">
+              <h1>STEP 1</h1>
+              <p className="font-semibold">YOUR INFO</p>
+            </div>
+          </div>
+          <div className="flex flex-row w-[200px] h-[40px] items-center mb-8">
+            <div className="rounded-full border-2 border-white h-[40px] w-[40px] text-center font-semibold p-1 ">
+              {" "}
+              2{" "}
+            </div>
+            <div className="text-sm ml-4">
+              <h1>STEP 2</h1>
+              <p className="font-semibold">SELECT PLAN</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
