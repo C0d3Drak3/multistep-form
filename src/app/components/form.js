@@ -9,7 +9,7 @@ export default function Form() {
   const uwu = "uwu";
 
   return (
-    <div className="bg-slate-100 flex flex-row rounded-xl shadow-xl w-[1000px] h-[600px] justify-between">
+    <div className="bg-slate-100 flex flex-row rounded-xl shadow-xl w-[1000px] h-[600px] justify-between font-ubuntu">
       <div className="relative flex flex-col justify-center items-center w-[300px] h-[600px] ">
         {/* BACKGROUND IMG */}
         <svg
