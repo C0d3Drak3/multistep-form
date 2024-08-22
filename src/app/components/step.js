@@ -6,7 +6,7 @@ import Advanced from "../../../public/images/icon-advanced.svg";
 import Pro from "../../../public/images/icon-pro.svg";
 
 export default function Step(props) {
-  const [page, setPage] = useState(2);
+  const [page, setPage] = useState(3);
 
   return (
     <div>
@@ -101,7 +101,26 @@ export default function Step(props) {
           </div>
         </div>
       ) : page === 3 ? (
-        <div></div>
+        <div className="flex flex-col w-[500px] h-[550px] border-0 text-blue-900  py-4 place-content-between">
+          <div className="flex flex-col mt-4 ">
+            <h1 className="text-3xl font-bold  ">Pick add-ons</h1>
+            <p className="text-lg text-gray-400 mt-1 ">
+              Add-ons help enhance tour gaming experience.
+            </p>
+          </div>
+          <div className="flex flex-col">
+            <button className="w-full h-[100px] flex flex-row rounded-md border-[1px] border-gray-400 justify-start p-4"></button>
+            <button className="w-full h-[100px] flex flex-row rounded-md border-[1px] border-gray-400 justify-start p-4"></button>
+            <button className="w-full h-[100px] flex flex-row rounded-md border-[1px] border-gray-400 justify-start p-4"></button>
+          </div>
+
+          <div className="flex flex-row mt-8 w-full  justify-between ">
+            <button className=" text-sky-900 font-medium">Go Back</button>
+            <button className="bg-sky-900 rounded-md h-[50px] w-[120px] text-white font-medium">
+              Next Step
+            </button>
+          </div>
+        </div>
       ) : (
         <div></div>
       )}
