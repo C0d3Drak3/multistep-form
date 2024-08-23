@@ -4,9 +4,15 @@ import Image from "next/image";
 import Arcade from "../../../public/images/icon-arcade.svg";
 import Advanced from "../../../public/images/icon-advanced.svg";
 import Pro from "../../../public/images/icon-pro.svg";
+import Check from "../../../public/images/icon-checkmark.svg";
 
 export default function Step(props) {
   const [page, setPage] = useState(3);
+  const [isFilled, setIsFilled] = useState(false);
+
+  const toggleFill = () => {
+    setIsFilled(!isFilled);
+  };
 
   return (
     <div>
@@ -108,10 +114,28 @@ export default function Step(props) {
               Add-ons help enhance tour gaming experience.
             </p>
           </div>
-          <div className="flex flex-col">
-            <button className="w-full h-[100px] flex flex-row rounded-md border-[1px] border-gray-400 justify-start p-4"></button>
-            <button className="w-full h-[100px] flex flex-row rounded-md border-[1px] border-gray-400 justify-start p-4"></button>
-            <button className="w-full h-[100px] flex flex-row rounded-md border-[1px] border-gray-400 justify-start p-4"></button>
+          <div className="flex flex-col space-y-4">
+            <button
+              onClick={toggleFill}
+              className="w-full h-[80px] flex flex-row rounded-md border-[1px] border-gray-400 justify-start p-4 "
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="50"
+                height="50"
+                viewBox="0 0 50 50"
+                className=" border-2 border-red-700"
+              >
+                <path
+                  fill={isFilled ? "full" : "none"}
+                  stroke="#FFF"
+                  strokeWidth=""
+                  d="m1 4 3.433 3.433L10.866 1"
+                />
+              </svg>
+            </button>
+            <button className="w-full h-[80px] flex flex-row rounded-md border-[1px] border-gray-400 justify-start p-4"></button>
+            <button className="w-full h-[80px] flex flex-row rounded-md border-[1px] border-gray-400 justify-start p-4"></button>
           </div>
 
           <div className="flex flex-row mt-8 w-full  justify-between ">
