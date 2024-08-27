@@ -8,10 +8,26 @@ import Check from "../../../public/images/icon-checkmark.svg";
 
 export default function Step(props) {
   const [page, setPage] = useState(3);
-  const [isFilled, setIsFilled] = useState(false);
+  const [isFilled1, setIsFilled1] = useState(false);
+  const [isFilled2, setIsFilled2] = useState(false);
+  const [isFilled3, setIsFilled3] = useState(false);
 
-  const toggleFill = () => {
-    setIsFilled(!isFilled);
+  const toggleFill1 = () => {
+    setIsFilled1(!isFilled1);
+  };
+  const toggleFill2 = () => {
+    setIsFilled2(!isFilled2);
+  };
+  const toggleFill3 = () => {
+    setIsFilled3(!isFilled3);
+  };
+
+  const toggleBack = () => {
+    setPage(page - 1);
+  };
+
+  const toggleNext = () => {
+    setPage(page + 1);
   };
 
   return (
@@ -116,31 +132,77 @@ export default function Step(props) {
           </div>
           <div className="flex flex-col space-y-4">
             <button
-              onClick={toggleFill}
-              className="w-full h-[80px] flex flex-row rounded-md border-[1px] border-gray-400 justify-start p-4 "
+              onClick={toggleFill1}
+              className="w-full h-[80px] flex flex-row rounded-md border-[1px] border-gray-400 justify-between  p-4 "
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="50"
                 height="50"
-                viewBox="0 0 50 50"
+                viewBox="0 0 12 9"
                 className=" border-2 border-red-700"
               >
                 <path
-                  fill={isFilled ? "full" : "none"}
+                  fill={isFilled1 ? "full" : "none"}
                   stroke="#FFF"
-                  strokeWidth=""
+                  strokeWidth="2"
+                  d="m1 4 3.433 3.433L10.866 1"
+                />
+              </svg>
+              <div className=" flex flex-col  text-left">
+                <p>Online service</p>
+                <p>Access to multiplayer games</p>
+              </div>
+              <p>+$1/mo</p>
+            </button>
+            <button
+              onClick={toggleFill2}
+              className="w-full h-[80px] flex flex-row rounded-md border-[1px] border-gray-400 justify-start p-4"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="50"
+                height="50"
+                viewBox="0 0 12 9"
+                className=" border-2 border-red-700"
+              >
+                <path
+                  fill={isFilled2 ? "full" : "none"}
+                  stroke="#FFF"
+                  strokeWidth="2"
                   d="m1 4 3.433 3.433L10.866 1"
                 />
               </svg>
             </button>
-            <button className="w-full h-[80px] flex flex-row rounded-md border-[1px] border-gray-400 justify-start p-4"></button>
-            <button className="w-full h-[80px] flex flex-row rounded-md border-[1px] border-gray-400 justify-start p-4"></button>
+            <button
+              onClick={toggleFill3}
+              className="w-full h-[80px] flex flex-row rounded-md border-[1px] border-gray-400 justify-start p-4"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="50"
+                height="50"
+                viewBox="0 0 12 9"
+                className=" border-2 border-red-700"
+              >
+                <path
+                  fill={isFilled3 ? "full" : "none"}
+                  stroke="#FFF"
+                  strokeWidth="2"
+                  d="m1 4 3.433 3.433L10.866 1"
+                />
+              </svg>
+            </button>
           </div>
 
           <div className="flex flex-row mt-8 w-full  justify-between ">
-            <button className=" text-sky-900 font-medium">Go Back</button>
-            <button className="bg-sky-900 rounded-md h-[50px] w-[120px] text-white font-medium">
+            <button onClick={toggleBack} className=" text-sky-900 font-medium">
+              Go Back
+            </button>
+            <button
+              onClick={toggleNext}
+              className="bg-sky-900 rounded-md h-[50px] w-[120px] text-white font-medium"
+            >
               Next Step
             </button>
           </div>
