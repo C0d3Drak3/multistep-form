@@ -4,10 +4,9 @@ import Image from "next/image";
 import Arcade from "../../../public/images/icon-arcade.svg";
 import Advanced from "../../../public/images/icon-advanced.svg";
 import Pro from "../../../public/images/icon-pro.svg";
-import Check from "../../../public/images/icon-checkmark.svg";
 
 export default function Step(props) {
-  const [page, setPage] = useState(3);
+  const [page, setPage] = useState(4);
   const [isFilled1, setIsFilled1] = useState(false);
   const [isFilled2, setIsFilled2] = useState(false);
   const [isFilled3, setIsFilled3] = useState(false);
@@ -133,65 +132,101 @@ export default function Step(props) {
           <div className="flex flex-col space-y-4">
             <button
               onClick={toggleFill1}
-              className="w-full h-[80px] flex flex-row rounded-md border-[1px] border-gray-400 justify-between  p-4 "
+              className={`w-full h-[80px] flex flex-row rounded-md  ${
+                isFilled1
+                  ? "border-blue-600 border-[2px] "
+                  : "border-gray-400 border-[1px] hover:border-blue-600 hover:border-[1px]"
+              }  justify-between items-center p-4 `}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="50"
-                height="50"
-                viewBox="0 0 12 9"
-                className=" border-2 border-red-700"
+                width="25"
+                height="25"
+                viewBox="0 0 10 10"
+                className={`border-[1px] rounded-md border-gray-400 p-1 ${
+                  isFilled1 ? "bg-blue-600" : "bg-none"
+                } `}
               >
                 <path
-                  fill={isFilled1 ? "full" : "none"}
+                  fill="none"
                   stroke="#FFF"
                   strokeWidth="2"
                   d="m1 4 3.433 3.433L10.866 1"
                 />
               </svg>
-              <div className=" flex flex-col  text-left">
-                <p>Online service</p>
-                <p>Access to multiplayer games</p>
+              <div className="flex flex-row justify-between w-full text-gray-400 items-center">
+                <div className=" flex flex-col  text-left ml-4">
+                  <p className="text-blue-900 font-semibold">Online service</p>
+                  <p>Access to multiplayer games</p>
+                </div>
+                <p className="text-blue-600 font-medium">+$1/mo</p>
               </div>
-              <p>+$1/mo</p>
             </button>
             <button
               onClick={toggleFill2}
-              className="w-full h-[80px] flex flex-row rounded-md border-[1px] border-gray-400 justify-start p-4"
+              className={`w-full h-[80px] flex flex-row rounded-md  ${
+                isFilled2
+                  ? "border-blue-600 border-[2px] "
+                  : "border-gray-400 border-[1px] hover:border-blue-600 hover:border-[1px]"
+              }  justify-between items-center p-4 `}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="50"
-                height="50"
-                viewBox="0 0 12 9"
-                className=" border-2 border-red-700"
+                width="25"
+                height="25"
+                viewBox="0 0 10 10"
+                className={`border-[1px] rounded-md border-gray-400 p-1 ${
+                  isFilled2 ? "bg-blue-600" : "bg-none"
+                } `}
               >
                 <path
-                  fill={isFilled2 ? "full" : "none"}
+                  fill="none"
                   stroke="#FFF"
                   strokeWidth="2"
                   d="m1 4 3.433 3.433L10.866 1"
                 />
               </svg>
+              <div className="flex flex-row justify-between w-full text-gray-400 items-center">
+                <div className=" flex flex-col  text-left ml-4">
+                  <p className="text-blue-900 font-semibold">Larger storage</p>
+                  <p>Extra 1TB of cloud save</p>
+                </div>
+                <p className="text-blue-600 font-medium">+$2/mo</p>
+              </div>
             </button>
             <button
               onClick={toggleFill3}
-              className="w-full h-[80px] flex flex-row rounded-md border-[1px] border-gray-400 justify-start p-4"
+              className={`w-full h-[80px] flex flex-row rounded-md  ${
+                isFilled3
+                  ? "border-blue-600 border-[2px] "
+                  : "border-gray-400 border-[1px] hover:border-blue-600 hover:border-[1px]"
+              }  justify-between items-center p-4 `}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="50"
-                height="50"
-                viewBox="0 0 12 9"
-                className=" border-2 border-red-700"
+                width="25"
+                height="25"
+                viewBox="0 0 10 10"
+                className={`border-[1px] rounded-md border-gray-400 p-1 ${
+                  isFilled3 ? "bg-blue-600" : "bg-none"
+                } `}
               >
                 <path
-                  fill={isFilled3 ? "full" : "none"}
+                  fill="none"
                   stroke="#FFF"
                   strokeWidth="2"
                   d="m1 4 3.433 3.433L10.866 1"
                 />
               </svg>
+              <div className="flex flex-row justify-between w-full text-gray-400 items-center">
+                <div className=" flex flex-col  text-left ml-4">
+                  <p className="text-blue-900 font-semibold">
+                    Customizable Profile
+                  </p>
+                  <p>Custom theme on your profile</p>
+                </div>
+                <p className="text-blue-600 font-medium">+$2/mo</p>
+              </div>
             </button>
           </div>
 
@@ -208,7 +243,26 @@ export default function Step(props) {
           </div>
         </div>
       ) : (
-        <div></div>
+        <div className="flex flex-col w-[500px] h-[550px] border-0 text-blue-900  py-4 place-content-between">
+          <div className="flex flex-col mt-4 ">
+            <h1 className="text-3xl font-bold  ">Finishing up</h1>
+            <p className="text-lg text-gray-400 mt-1 ">
+              Double-check everything looks OK before confirming.
+            </p>
+          </div>
+          <div>asfagsahasdfhadhf</div>
+          <div className="flex flex-row mt-8 w-full  justify-between ">
+            <button onClick={toggleBack} className=" text-sky-900 font-medium">
+              Go Back
+            </button>
+            <button
+              onClick={toggleNext}
+              className="bg-sky-900 rounded-md h-[50px] w-[120px] text-white font-medium"
+            >
+              Next Step
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );
