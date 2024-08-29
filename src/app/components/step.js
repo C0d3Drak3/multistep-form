@@ -6,10 +6,17 @@ import Advanced from "../../../public/images/icon-advanced.svg";
 import Pro from "../../../public/images/icon-pro.svg";
 
 export default function Step(props) {
-  const [page, setPage] = useState(4);
+  const [page, setPage] = useState(2);
+  //monthly=false, and yearly=true in the billing type
+  const [billing, setBilling] = useState(false);
+
   const [isFilled1, setIsFilled1] = useState(false);
   const [isFilled2, setIsFilled2] = useState(false);
   const [isFilled3, setIsFilled3] = useState(false);
+
+  const toggleBill = () => {
+    setBilling(!billing);
+  };
 
   const toggleFill1 = () => {
     setIsFilled1(!isFilled1);
@@ -23,10 +30,12 @@ export default function Step(props) {
 
   const toggleBack = () => {
     setPage(page - 1);
+    console.log("The page is: " + page);
   };
 
   const toggleNext = () => {
     setPage(page + 1);
+    console.log("The page is: " + page);
   };
 
   return (
@@ -54,7 +63,10 @@ export default function Step(props) {
             </div>
           </div>
           <div className="flex mt-8 w-full  place-content-end ">
-            <button className="bg-sky-900 rounded-md h-[50px] w-[120px] text-white font-medium">
+            <button
+              onClick={toggleNext}
+              className="bg-sky-900 rounded-md h-[50px] w-[120px] text-white font-medium"
+            >
               Next Step
             </button>
           </div>
@@ -69,7 +81,11 @@ export default function Step(props) {
           </div>
           <div className="flex flex-col">
             <div className="flex flex-row justify-between ">
-              <button className="w-[150px] h-[180px] flex flex-col rounded-md border-[1px] border-gray-400 justify-start p-4">
+              <button
+                className={`w-[150px] ${
+                  billing ? "h-[200px]" : "h-[180px]"
+                } flex flex-col rounded-md border-[1px] border-gray-400 justify-start p-4`}
+              >
                 <Image
                   src={Arcade}
                   alt="arcade"
@@ -79,9 +95,22 @@ export default function Step(props) {
                 />
 
                 <p className="text-lg font-bold text-blue-900 mt-10 ">Arcade</p>
-                <p className="text-lg  text-gray-400">$9/mo</p>
+                {billing ? (
+                  <div className="flex flex-col text-left">
+                    <p className="  text-gray-400">$90/yr</p>
+                    <p className=" font-medium   text-blue-900">
+                      2 months free
+                    </p>
+                  </div>
+                ) : (
+                  <p className="text-lg  text-gray-400">$9/mo</p>
+                )}
               </button>
-              <button className="w-[150px] h-[180px] flex flex-col rounded-md border-[1px] border-gray-400 justify-start p-4">
+              <button
+                className={`w-[150px] ${
+                  billing ? "h-[200px]" : "h-[180px]"
+                } flex flex-col rounded-md border-[1px] border-gray-400 justify-start p-4`}
+              >
                 <Image
                   src={Advanced}
                   alt="advanced"
@@ -93,9 +122,22 @@ export default function Step(props) {
                 <p className="text-lg font-bold text-blue-900 mt-10 ">
                   Advanced
                 </p>
-                <p className="text-lg  text-gray-400">$12/mo</p>
+                {billing ? (
+                  <div className="flex flex-col text-left">
+                    <p className="  text-gray-400">$120/yr</p>
+                    <p className=" font-medium   text-blue-900">
+                      2 months free
+                    </p>
+                  </div>
+                ) : (
+                  <p className="text-lg  text-gray-400">$12/mo</p>
+                )}
               </button>
-              <button className="w-[150px] h-[180px] flex flex-col rounded-md border-[1px] border-gray-400 justify-start p-4">
+              <button
+                className={`w-[150px] ${
+                  billing ? "h-[200px]" : "h-[180px]"
+                } flex flex-col rounded-md border-[1px] border-gray-400 justify-start p-4`}
+              >
                 <Image
                   src={Pro}
                   alt="pro"
@@ -105,18 +147,41 @@ export default function Step(props) {
                 />
 
                 <p className="text-lg font-bold text-blue-900 mt-10 ">Pro</p>
-                <p className="text-lg  text-gray-400">$15/mo</p>
+                {billing ? (
+                  <div className="flex flex-col text-left">
+                    <p className="  text-gray-400">$150/yr</p>
+                    <p className=" font-medium   text-blue-900">
+                      2 months free
+                    </p>
+                  </div>
+                ) : (
+                  <p className="text-lg  text-gray-400">$15/mo</p>
+                )}
               </button>
             </div>
             <div className="flex flex-row text-blue-900 font-bold mt-10 justify-center">
               <p className="mx-5">Monthly</p>
-              <div className="rounded-2xl bg-slate-400">Selector</div>
+              <button
+                onClick={toggleBill}
+                className={` flex rounded-2xl bg-blue-900 w-[45px] h-[22px] p-[2px] ${
+                  billing ? " justify-end   " : " justify-start  "
+                } `}
+              >
+                <div className="flex z-10 bg-gray-50 rounded-full w-[18px] h-[18px]">
+                  .
+                </div>
+              </button>
               <p className="mx-5">Yearly</p>
             </div>
           </div>
           <div className="flex flex-row mt-8 w-full  justify-between ">
-            <button className=" text-sky-900 font-medium">Go Back</button>
-            <button className="bg-sky-900 rounded-md h-[50px] w-[120px] text-white font-medium">
+            <button onClick={toggleBack} className=" text-sky-900 font-medium">
+              Go Back
+            </button>
+            <button
+              onClick={toggleNext}
+              className="bg-sky-900 rounded-md h-[50px] w-[120px] text-white font-medium"
+            >
               Next Step
             </button>
           </div>
