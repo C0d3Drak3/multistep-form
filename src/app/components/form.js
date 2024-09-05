@@ -6,8 +6,6 @@ import Step from "./step";
 export default function Form() {
   const [name, setName] = useState("");
 
-  const uwu = "uwu";
-
   return (
     <div className="bg-slate-100 flex flex-row rounded-xl shadow-xl w-[1000px] h-[600px] justify-between font-ubuntu">
       <div className="relative flex flex-col justify-center items-center w-[300px] h-[600px] ">
@@ -79,7 +77,7 @@ export default function Form() {
         </div>
       </div>
       <div className="flex justify-center items-center w-[700px] h-[600px]">
-        <Step props={uwu} />
+        <Step />
       </div>
     </div>
   );

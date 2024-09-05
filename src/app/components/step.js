@@ -1,14 +1,16 @@
 "use client";
 import React, { useState } from "react";
+import { useForm } from "../context/FormContext";
 import Image from "next/image";
 import Arcade from "../../../public/images/icon-arcade.svg";
 import Advanced from "../../../public/images/icon-advanced.svg";
 import Pro from "../../../public/images/icon-pro.svg";
 
 export default function Step(props) {
-  const [page, setPage] = useState(2);
+  const [page, setPage] = useState(1);
   //monthly=false, and yearly=true in the billing type
   const [billing, setBilling] = useState(false);
+  const { form, addToForm } = useForm();
 
   const [isFilled1, setIsFilled1] = useState(false);
   const [isFilled2, setIsFilled2] = useState(false);
@@ -35,6 +37,7 @@ export default function Step(props) {
 
   const toggleNext = () => {
     setPage(page + 1);
+    addToForm();
     console.log("The page is: " + page);
   };
 
