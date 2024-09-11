@@ -7,7 +7,20 @@ const FormContext = createContext();
 
 export const FormProvider = ({ children }) => {
   const { getItem, setItem } = useLocalStorage("MultiForm");
-  const [form, setForm] = useState([]);
+
+  // Estado inicial del formulario
+  //billing=1 es mensual, el estado inicial. Billing=2 es anual
+  const initialState = {
+    step: 1,
+    name: "",
+    email: "",
+    phoneNumber: "",
+    billing: 1,
+    planType: 0,
+    addOns: [],
+  };
+
+  const [form, setForm] = useState(initialState);
 
   useEffect(() => {
     const savedForm = getItem();
@@ -24,12 +37,16 @@ export const FormProvider = ({ children }) => {
 
   //Crear aqui la logica para insertar el contenido del form en el local storage y que siempre sobreescriba
 
-  const addToForm = (value) => {
-    setForm(["uwu"]);
+  const addToForm = (updatedFields, newStep) => {
+    setForm((prevForm) => ({
+      ...prevForm,
+      ...updatedFields,
+      step: newStep,
+    }));
   };
 
-  const deleteForm = (productId) => {
-    setForm([]);
+  const deleteForm = () => {
+    setForm(initialState);
     console.log("Deleted Form after Submit");
   };
 
