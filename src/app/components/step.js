@@ -9,7 +9,7 @@ import Pro from "../../../public/images/icon-pro.svg";
 export default function Step(props) {
   const [page, setPage] = useState(1);
   //monthly=false, and yearly=true in the billing type
-  const [billing, setBilling] = useState(false);
+  const [billing, setBilling] = useState(1);
   const { form, addToForm } = useForm();
 
   const [isFilled1, setIsFilled1] = useState(false);
@@ -17,7 +17,7 @@ export default function Step(props) {
   const [isFilled3, setIsFilled3] = useState(false);
 
   const toggleBill = () => {
-    setBilling(!billing);
+    billing == 2 ? setBilling(1) : setBilling(2);
   };
 
   const toggleFill1 = () => {
@@ -37,7 +37,15 @@ export default function Step(props) {
 
   const toggleNext = () => {
     setPage(page + 1);
-    addToForm();
+    addToForm(
+      {
+        name: "juan",
+        phoneNumber: "155462",
+        email: "juan@hotmail.com",
+        billing: billing,
+      },
+      page + 1
+    );
     console.log("The page is: " + page);
   };
 
@@ -54,15 +62,24 @@ export default function Step(props) {
           <div className="flex flex-col">
             <div className="flex flex-col ">
               <p className="font-medium">Name</p>
-              <input className="rounded-md border-[1px] mt-1 border-gray-400 focus:border-blue-800 focus h-[45px] w-full p-3 text-lg font-semibold"></input>
+              <input
+                key={1}
+                className="rounded-md border-[1px] mt-1 border-gray-400 focus:border-blue-800 focus h-[45px] w-full p-3 text-lg font-semibold"
+              ></input>
             </div>
             <div className="flex flex-col mt-6 ">
               <p className="font-medium">Email Address</p>
-              <input className="rounded-md border-[1px] mt-1 border-gray-400 focus:border-blue-800 focus h-[45px] w-full p-3 text-lg font-semibold"></input>
+              <input
+                key="2"
+                className="rounded-md border-[1px] mt-1 border-gray-400 focus:border-blue-800 focus h-[45px] w-full p-3 text-lg font-semibold"
+              ></input>
             </div>
             <div className="flex flex-col mt-6 ">
               <p className="font-medium">Phone Number</p>
-              <input className="rounded-md border-[1px] mt-1 border-gray-400 focus:border-blue-800 focus h-[45px] w-full p-3 text-lg font-semibold"></input>
+              <input
+                key="3"
+                className="rounded-md border-[1px] mt-1 border-gray-400 focus:border-blue-800 focus h-[45px] w-full p-3 text-lg font-semibold"
+              ></input>
             </div>
           </div>
           <div className="flex mt-8 w-full  place-content-end ">
@@ -86,7 +103,7 @@ export default function Step(props) {
             <div className="flex flex-row justify-between ">
               <button
                 className={`w-[150px] ${
-                  billing ? "h-[200px]" : "h-[180px]"
+                  billing == 2 ? "h-[200px]" : "h-[180px]"
                 } flex flex-col rounded-md border-[1px] border-gray-400 justify-start p-4`}
               >
                 <Image
@@ -98,7 +115,7 @@ export default function Step(props) {
                 />
 
                 <p className="text-lg font-bold text-blue-900 mt-10 ">Arcade</p>
-                {billing ? (
+                {billing == 2 ? (
                   <div className="flex flex-col text-left">
                     <p className="  text-gray-400">$90/yr</p>
                     <p className=" font-medium   text-blue-900">
@@ -111,7 +128,7 @@ export default function Step(props) {
               </button>
               <button
                 className={`w-[150px] ${
-                  billing ? "h-[200px]" : "h-[180px]"
+                  billing == 2 ? "h-[200px]" : "h-[180px]"
                 } flex flex-col rounded-md border-[1px] border-gray-400 justify-start p-4`}
               >
                 <Image
@@ -125,7 +142,7 @@ export default function Step(props) {
                 <p className="text-lg font-bold text-blue-900 mt-10 ">
                   Advanced
                 </p>
-                {billing ? (
+                {billing == 2 ? (
                   <div className="flex flex-col text-left">
                     <p className="  text-gray-400">$120/yr</p>
                     <p className=" font-medium   text-blue-900">
@@ -138,7 +155,7 @@ export default function Step(props) {
               </button>
               <button
                 className={`w-[150px] ${
-                  billing ? "h-[200px]" : "h-[180px]"
+                  billing == 2 ? "h-[200px]" : "h-[180px]"
                 } flex flex-col rounded-md border-[1px] border-gray-400 justify-start p-4`}
               >
                 <Image
@@ -150,7 +167,7 @@ export default function Step(props) {
                 />
 
                 <p className="text-lg font-bold text-blue-900 mt-10 ">Pro</p>
-                {billing ? (
+                {billing == 2 ? (
                   <div className="flex flex-col text-left">
                     <p className="  text-gray-400">$150/yr</p>
                     <p className=" font-medium   text-blue-900">
@@ -167,7 +184,7 @@ export default function Step(props) {
               <button
                 onClick={toggleBill}
                 className={` flex rounded-2xl bg-blue-900 w-[45px] h-[22px] p-[2px] ${
-                  billing ? " justify-end   " : " justify-start  "
+                  billing == 2 ? " justify-end   " : " justify-start  "
                 } `}
               >
                 <div className="flex z-10 bg-gray-50 rounded-full w-[18px] h-[18px]">
