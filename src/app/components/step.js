@@ -10,6 +10,7 @@ export default function Step(props) {
   const [page, setPage] = useState(1);
   //monthly=false, and yearly=true in the billing type
   const [billing, setBilling] = useState(1);
+  const [planType, setPlanType] = useState(null); // Estado para el plan seleccionado
   const { form, addToForm } = useForm();
 
   const [isFilled1, setIsFilled1] = useState(false);
@@ -17,7 +18,11 @@ export default function Step(props) {
   const [isFilled3, setIsFilled3] = useState(false);
 
   const toggleBill = () => {
-    billing == 2 ? setBilling(1) : setBilling(2);
+    setBilling(billing === 2 ? 1 : 2);
+  };
+  // Función para seleccionar un plan
+  const selectPlan = (plan) => {
+    setPlanType(plan);
   };
 
   const toggleFill1 = () => {
@@ -35,18 +40,71 @@ export default function Step(props) {
     console.log("The page is: " + page);
   };
 
+  // Estados para los inputs
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+
+  // Estados para mostrar errores
+  const [error, setError] = useState({
+    name: "",
+    email: "",
+    phoneNumber: "",
+  });
+
+  // Función de validación
+  const validateForm = () => {
+    let isValid = true;
+    let errors = { name: "", email: "", phoneNumber: "" };
+
+    // Validar nombre (una palabra)
+    if (!/^\S+$/.test(name)) {
+      errors.name = "El nombre debe ser una palabra.";
+      isValid = false;
+    }
+
+    // Validar email
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errors.email = "El email debe ser válido.";
+      isValid = false;
+    }
+
+    // Validar teléfono (formato + seguido de números)
+    if (!/^\+\d+$/.test(phoneNumber)) {
+      errors.phoneNumber =
+        "El teléfono debe empezar con + y contener solo números.";
+      isValid = false;
+    }
+
+    setError(errors);
+    return isValid;
+  };
+
   const toggleNext = () => {
-    setPage(page + 1);
-    addToForm(
-      {
-        name: "juan",
-        phoneNumber: "155462",
-        email: "juan@hotmail.com",
-        billing: billing,
-      },
-      page + 1
-    );
-    console.log("The page is: " + page);
+    if (validateForm() && page === 1) {
+      setPage(page + 1);
+      addToForm(
+        {
+          name: name,
+          phoneNumber: phoneNumber,
+          email: email,
+          billing: billing,
+        },
+        page + 1
+      );
+      console.log("The page is: " + (page + 1));
+    } else if (page === 2 && planType === null) {
+      alert("Por favor, selecciona un plan.");
+      return;
+    } else if (page === 2) {
+      addToForm(
+        {
+          planType, // Guardar el plan seleccionado
+        },
+        page + 1
+      );
+      setPage(page + 1);
+    }
   };
 
   return (
@@ -63,23 +121,31 @@ export default function Step(props) {
             <div className="flex flex-col ">
               <p className="font-medium">Name</p>
               <input
-                key={1}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 className="rounded-md border-[1px] mt-1 border-gray-400 focus:border-blue-800 focus h-[45px] w-full p-3 text-lg font-semibold"
-              ></input>
+              />
+              {error.name && <p className="text-red-500">{error.name}</p>}
             </div>
             <div className="flex flex-col mt-6 ">
               <p className="font-medium">Email Address</p>
               <input
-                key="2"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="rounded-md border-[1px] mt-1 border-gray-400 focus:border-blue-800 focus h-[45px] w-full p-3 text-lg font-semibold"
-              ></input>
+              />
+              {error.email && <p className="text-red-500">{error.email}</p>}
             </div>
             <div className="flex flex-col mt-6 ">
               <p className="font-medium">Phone Number</p>
               <input
-                key="3"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
                 className="rounded-md border-[1px] mt-1 border-gray-400 focus:border-blue-800 focus h-[45px] w-full p-3 text-lg font-semibold"
-              ></input>
+              />
+              {error.phoneNumber && (
+                <p className="text-red-500">{error.phoneNumber}</p>
+              )}
             </div>
           </div>
           <div className="flex mt-8 w-full  place-content-end ">
@@ -104,7 +170,10 @@ export default function Step(props) {
               <button
                 className={`w-[150px] ${
                   billing == 2 ? "h-[200px]" : "h-[180px]"
-                } flex flex-col rounded-md border-[1px] border-gray-400 justify-start p-4`}
+                } flex flex-col rounded-md border-[1px] ${
+                  planType === "Arcade" ? "border-blue-600" : "border-gray-400"
+                } justify-start p-4`}
+                onClick={() => selectPlan("Arcade")}
               >
                 <Image
                   src={Arcade}
@@ -129,7 +198,12 @@ export default function Step(props) {
               <button
                 className={`w-[150px] ${
                   billing == 2 ? "h-[200px]" : "h-[180px]"
-                } flex flex-col rounded-md border-[1px] border-gray-400 justify-start p-4`}
+                } flex flex-col rounded-md border-[1px] ${
+                  planType === "Advanced"
+                    ? "border-blue-600"
+                    : "border-gray-400"
+                } justify-start p-4`}
+                onClick={() => selectPlan("Advanced")}
               >
                 <Image
                   src={Advanced}
@@ -156,7 +230,10 @@ export default function Step(props) {
               <button
                 className={`w-[150px] ${
                   billing == 2 ? "h-[200px]" : "h-[180px]"
-                } flex flex-col rounded-md border-[1px] border-gray-400 justify-start p-4`}
+                } flex flex-col rounded-md border-[1px]  ${
+                  planType === "Pro" ? "border-blue-600" : "border-gray-400"
+                } justify-start p-4`}
+                onClick={() => selectPlan("Pro")}
               >
                 <Image
                   src={Pro}
