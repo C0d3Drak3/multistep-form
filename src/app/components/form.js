@@ -1,10 +1,17 @@
 "use client";
-import React, { useState } from "react";
-import Image from "next/image";
+import React, { useState, useEffect } from "react";
+import { useForm } from "../context/FormContext";
+//import Image from "next/image";
 import Step from "./step";
 
 export default function Form() {
-  const [name, setName] = useState("");
+  const [step, setStep] = useState("");
+  const { form } = useForm();
+
+  // useEffect para sincronizar el estado del contexto con el estado local
+  useEffect(() => {
+    setStep(form.step); // Actualizamos el estado del step cuando cambia en el contexto
+  }, [form.step]);
 
   return (
     <div className="bg-slate-100 flex flex-row rounded-xl shadow-xl w-[1000px] h-[600px] justify-between font-ubuntu">
@@ -55,7 +62,13 @@ export default function Form() {
         {/* STEPS  */}
         <div className="absolute z-30 w-[200px] h-[500px] text-white">
           <div className="flex flex-row w-[200px] h-[40px] items-center mb-8">
-            <div className="rounded-full border-2 border-white h-[40px] w-[40px] text-center font-semibold p-1 ">
+            <div
+              className={`rounded-full border-2  h-[40px] w-[40px] text-center font-semibold p-1 ${
+                step === 1
+                  ? "bg-sky-200 border-sky-200 text-blue-800"
+                  : " border-white"
+              }`}
+            >
               {" "}
               1{" "}
             </div>
@@ -65,13 +78,51 @@ export default function Form() {
             </div>
           </div>
           <div className="flex flex-row w-[200px] h-[40px] items-center mb-8">
-            <div className="rounded-full border-2 border-white h-[40px] w-[40px] text-center font-semibold p-1 ">
+            <div
+              className={`rounded-full border-2  h-[40px] w-[40px] text-center font-semibold p-1 ${
+                step === 2
+                  ? "bg-sky-200 border-sky-200 text-blue-800"
+                  : " border-white"
+              }`}
+            >
               {" "}
               2{" "}
             </div>
             <div className="text-sm ml-4">
               <h1>STEP 2</h1>
               <p className="font-semibold">SELECT PLAN</p>
+            </div>
+          </div>
+          <div className="flex flex-row w-[200px] h-[40px] items-center mb-8">
+            <div
+              className={`rounded-full border-2  h-[40px] w-[40px] text-center font-semibold p-1 ${
+                step === 3
+                  ? "bg-sky-200 border-sky-200 text-blue-800"
+                  : " border-white"
+              }`}
+            >
+              {" "}
+              3{" "}
+            </div>
+            <div className="text-sm ml-4">
+              <h1>STEP 3</h1>
+              <p className="font-semibold">ADD-ONS</p>
+            </div>
+          </div>
+          <div className="flex flex-row w-[200px] h-[40px] items-center mb-8">
+            <div
+              className={`rounded-full border-2  h-[40px] w-[40px] text-center font-semibold p-1 ${
+                step === 4
+                  ? "bg-sky-200 border-sky-200 text-blue-800"
+                  : " border-white"
+              }`}
+            >
+              {" "}
+              4{" "}
+            </div>
+            <div className="text-sm ml-4">
+              <h1>STEP 4</h1>
+              <p className="font-semibold">SUMMARY</p>
             </div>
           </div>
         </div>

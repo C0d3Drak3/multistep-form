@@ -37,6 +37,15 @@ export default function Step(props) {
 
   const toggleBack = () => {
     setPage(page - 1);
+    addToForm(
+      {
+        name: name,
+        phoneNumber: phoneNumber,
+        email: email,
+        billing: billing,
+      },
+      page - 1
+    );
     console.log("The page is: " + page);
   };
 
