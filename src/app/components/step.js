@@ -7,8 +7,8 @@ import Advanced from "../../../public/images/icon-advanced.svg";
 import Pro from "../../../public/images/icon-pro.svg";
 
 export default function Step(props) {
-  const [page, setPage] = useState(1);
-  //monthly=false, and yearly=true in the billing type
+  const [page, setPage] = useState(3);
+  //monthly=1, and yearly=2 in the billing type
   const [billing, setBilling] = useState(1);
   const [planType, setPlanType] = useState(null); // Estado para el plan seleccionado
   const { form, addToForm } = useForm();
@@ -16,6 +16,7 @@ export default function Step(props) {
   const [isFilled1, setIsFilled1] = useState(false);
   const [isFilled2, setIsFilled2] = useState(false);
   const [isFilled3, setIsFilled3] = useState(false);
+  const [addOns, setAddons] = useState([]);
 
   const toggleBill = () => {
     setBilling(billing === 2 ? 1 : 2);
@@ -25,14 +26,18 @@ export default function Step(props) {
     setPlanType(plan);
   };
 
+  //Funciones que controlan los Addons
   const toggleFill1 = () => {
     setIsFilled1(!isFilled1);
+    setAddons([!isFilled1, isFilled2, isFilled3]);
   };
   const toggleFill2 = () => {
     setIsFilled2(!isFilled2);
+    setAddons([isFilled1, !isFilled2, isFilled3]);
   };
   const toggleFill3 = () => {
     setIsFilled3(!isFilled3);
+    setAddons([isFilled1, isFilled2, !isFilled3]);
   };
 
   const toggleBack = () => {
@@ -108,7 +113,17 @@ export default function Step(props) {
     } else if (page === 2) {
       addToForm(
         {
-          planType, // Guardar el plan seleccionado
+          planType,
+          billing,
+        },
+        page + 1
+      );
+      setPage(page + 1);
+    } else if (page === 3) {
+      console.log(addOns);
+      addToForm(
+        {
+          addOns, // Guardar el plan seleccionado
         },
         page + 1
       );
@@ -330,7 +345,9 @@ export default function Step(props) {
                   <p className="text-blue-900 font-semibold">Online service</p>
                   <p>Access to multiplayer games</p>
                 </div>
-                <p className="text-blue-600 font-medium">+$1/mo</p>
+                <p className="text-blue-600 font-medium">
+                  {billing === 1 ? "+$1/mo" : "+$10/yr"}
+                </p>
               </div>
             </button>
             <button
@@ -362,7 +379,9 @@ export default function Step(props) {
                   <p className="text-blue-900 font-semibold">Larger storage</p>
                   <p>Extra 1TB of cloud save</p>
                 </div>
-                <p className="text-blue-600 font-medium">+$2/mo</p>
+                <p className="text-blue-600 font-medium">
+                  {billing === 1 ? "+$2/mo" : "+$20/yr"}
+                </p>
               </div>
             </button>
             <button
@@ -396,7 +415,9 @@ export default function Step(props) {
                   </p>
                   <p>Custom theme on your profile</p>
                 </div>
-                <p className="text-blue-600 font-medium">+$2/mo</p>
+                <p className="text-blue-600 font-medium">
+                  {billing === 1 ? "+$2/mo" : "+$20/yr"}
+                </p>
               </div>
             </button>
           </div>
