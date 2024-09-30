@@ -17,6 +17,11 @@ export default function Step(props) {
   const [isFilled2, setIsFilled2] = useState(false);
   const [isFilled3, setIsFilled3] = useState(false);
   const [addOns, setAddons] = useState([]);
+  const addOnNames = [
+    "Online Service",
+    "Larger Storage",
+    "Customizable Profile",
+  ];
 
   const toggleBill = () => {
     setBilling(billing === 2 ? 1 : 2);
@@ -442,16 +447,47 @@ export default function Step(props) {
               Double-check everything looks OK before confirming.
             </p>
           </div>
-          <div>asfagsahasdfhadhf</div>
+          <div className="flex flex-col ">
+            <div className="flex flex-row align-middle justify-around">
+              <div>
+                <h2 className="text-2xl font-bold">
+                  {planType} {billing === 1 ? "(Monthly)" : "(Yearly)"}
+                </h2>
+                <button onClick={toggleBill}>Change</button>
+              </div>
+              <p>
+                {planType === "Arcade"
+                  ? billing === 1
+                    ? "$9/mo"
+                    : "$90/yr"
+                  : planType === "Advanced"
+                  ? billing === 1
+                    ? "$12/mo"
+                    : "$120/yr"
+                  : billing === 1
+                  ? "$15/mo"
+                  : "$150/yr"}
+              </p>
+            </div>
+            <hr></hr>
+            {/* Seguir aca*/}
+            <div className="flex flex-col">
+              {addOns.map(
+                (selected, index) =>
+                  selected && <p key={index}>{addOnNames[index]}</p>
+              )}
+            </div>
+            <div></div>
+          </div>
           <div className="flex flex-row mt-8 w-full  justify-between ">
             <button onClick={toggleBack} className=" text-sky-900 font-medium">
               Go Back
             </button>
             <button
-              onClick={toggleNext}
+              onClick={""}
               className="bg-sky-900 rounded-md h-[50px] w-[120px] text-white font-medium"
             >
-              Next Step
+              Submit
             </button>
           </div>
         </div>
