@@ -17,10 +17,10 @@ export default function Step(props) {
   const [isFilled2, setIsFilled2] = useState(false);
   const [isFilled3, setIsFilled3] = useState(false);
   const [addOns, setAddons] = useState([]);
-  const addOnNames = [
-    "Online Service",
-    "Larger Storage",
-    "Customizable Profile",
+  const addOnes = [
+    { name: "Online Service", monthlyPrice: 1, yearlyPrice: 10 },
+    { name: "Larger Storage", monthlyPrice: 2, yearlyPrice: 20 },
+    { name: "Customizable Profile", monthlyPrice: 2, yearlyPrice: 20 },
   ];
 
   const toggleBill = () => {
@@ -44,6 +44,14 @@ export default function Step(props) {
     setIsFilled3(!isFilled3);
     setAddons([isFilled1, isFilled2, !isFilled3]);
   };
+
+  // Calcular el total de los add-ons seleccionados
+  const addOnsTotal = addOnes.reduce((total, addOn, index) => {
+    if (addOns[index]) {
+      return total + (billing === 1 ? addOn.monthlyPrice : addOn.yearlyPrice);
+    }
+    return total;
+  }, 0);
 
   const toggleBack = () => {
     setPage(page - 1);
@@ -448,14 +456,14 @@ export default function Step(props) {
             </p>
           </div>
           <div className="flex flex-col ">
-            <div className="flex flex-row align-middle justify-around">
+            <div className="flex flex-row align-middle justify-between">
               <div>
-                <h2 className="text-2xl font-bold">
+                <h2 className="text-xl font-bold">
                   {planType} {billing === 1 ? "(Monthly)" : "(Yearly)"}
                 </h2>
                 <button onClick={toggleBill}>Change</button>
               </div>
-              <p>
+              <p className="text-lg font-bold">
                 {planType === "Arcade"
                   ? billing === 1
                     ? "$9/mo"
@@ -472,12 +480,44 @@ export default function Step(props) {
             <hr></hr>
             {/* Seguir aca*/}
             <div className="flex flex-col">
-              {addOns.map(
-                (selected, index) =>
-                  selected && <p key={index}>{addOnNames[index]}</p>
+              {addOnes.map(
+                (addOn, index) =>
+                  addOns[index] && (
+                    <div
+                      key={index}
+                      className="flex flex-row justify-between my-2"
+                    >
+                      <p className="text-gray-400">{addOn.name}</p>
+                      <p className="font-semibold">
+                        +$
+                        {billing === 1
+                          ? addOn.monthlyPrice + "/mo"
+                          : addOn.yearlyPrice + "/yr"}
+                      </p>
+                    </div>
+                  )
               )}
             </div>
-            <div></div>
+            <div className="flex flex-row justify-between mt-5">
+              <p className="text-gray-400">
+                Total {billing === 1 ? "(per month)" : "(per year)"}
+              </p>
+              <p className="text-xl font-bold text-blue-700">
+                $
+                {(planType === "Arcade"
+                  ? billing === 1
+                    ? 9
+                    : 90
+                  : planType === "Advanced"
+                  ? billing === 1
+                    ? 12
+                    : 120
+                  : billing === 1
+                  ? 15
+                  : 150) + addOnsTotal}
+                /{billing === 1 ? "mo" : "yr"}
+              </p>
+            </div>
           </div>
           <div className="flex flex-row mt-8 w-full  justify-between ">
             <button onClick={toggleBack} className=" text-sky-900 font-medium">
@@ -485,9 +525,9 @@ export default function Step(props) {
             </button>
             <button
               onClick={""}
-              className="bg-sky-900 rounded-md h-[50px] w-[120px] text-white font-medium"
+              className="bg-blue-700 rounded-md h-[50px] w-[120px] text-white font-medium"
             >
-              Submit
+              Confirm
             </button>
           </div>
         </div>
