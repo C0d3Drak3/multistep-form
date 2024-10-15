@@ -85,21 +85,29 @@ export default function Step(props) {
     let errors = { name: "", email: "", phoneNumber: "" };
 
     // Validar nombre (una palabra)
-    if (!/^\S+$/.test(name)) {
-      errors.name = "El nombre debe ser una palabra.";
+    if (name === "") {
+      errors.name = "This field is required";
+      isValid = false;
+    } else if (!/^\S+\s\S+$/.test(name)) {
+      errors.name = "Provide a valid Name and Last name";
       isValid = false;
     }
 
     // Validar email
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      errors.email = "El email debe ser válido.";
+    if (email === "") {
+      errors.email = "This field is required";
+      isValid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errors.email = "Provide a valid e-mai";
       isValid = false;
     }
 
     // Validar teléfono (formato + seguido de números)
-    if (!/^\+\d+$/.test(phoneNumber)) {
-      errors.phoneNumber =
-        "El teléfono debe empezar con + y contener solo números.";
+    if (phoneNumber === "") {
+      errors.phoneNumber = "This field is required";
+      isValid = false;
+    } else if (!/^\+\d+$/.test(phoneNumber)) {
+      errors.phoneNumber = "Provide a valid Telephone Number";
       isValid = false;
     }
 
@@ -159,33 +167,49 @@ export default function Step(props) {
           </div>
           <div className="flex flex-col">
             <div className="flex flex-col ">
-              <p className="font-medium">Name</p>
+              <div className="flex flex-row justify-between">
+                <p className="font-medium">Name</p>
+
+                {error.name && (
+                  <p className="text-red-500 font-semibold">{error.name}</p>
+                )}
+              </div>
               <input
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="rounded-md border-[1px] mt-1 border-gray-400 focus:border-blue-800 focus h-[45px] w-full p-3 text-lg font-semibold"
+                placeholder="e.g. Stephen King"
+                className="rounded-md border-[1px] mt-1 border-gray-400 focus:border-blue-800 focus h-[45px] w-full p-3 text-lg font-semibold placeholder-gray-400"
               />
-              {error.name && <p className="text-red-500">{error.name}</p>}
             </div>
             <div className="flex flex-col mt-6 ">
-              <p className="font-medium">Email Address</p>
+              <div className="flex flex-row justify-between">
+                <p className="font-medium">Email Address</p>
+                {error.email && (
+                  <p className="text-red-500 font-semibold">{error.email}</p>
+                )}
+              </div>
               <input
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                placeholder="e.g. stephenking@lorem.com"
                 className="rounded-md border-[1px] mt-1 border-gray-400 focus:border-blue-800 focus h-[45px] w-full p-3 text-lg font-semibold"
               />
-              {error.email && <p className="text-red-500">{error.email}</p>}
             </div>
             <div className="flex flex-col mt-6 ">
-              <p className="font-medium">Phone Number</p>
+              <div className="flex flex-row justify-between">
+                <p className="font-medium">Phone Number</p>
+                {error.phoneNumber && (
+                  <p className="text-red-500 font-semibold">
+                    {error.phoneNumber}
+                  </p>
+                )}
+              </div>
               <input
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
+                placeholder="e.g. +5411155000999"
                 className="rounded-md border-[1px] mt-1 border-gray-400 focus:border-blue-800 focus h-[45px] w-full p-3 text-lg font-semibold"
               />
-              {error.phoneNumber && (
-                <p className="text-red-500">{error.phoneNumber}</p>
-              )}
             </div>
           </div>
           <div className="flex mt-8 w-full  place-content-end ">
@@ -214,7 +238,7 @@ export default function Step(props) {
                   planType === "Arcade"
                     ? "border-blue-600 border-[2px]"
                     : "border-gray-400 border-[1px]"
-                } justify-start p-4`}
+                } justify-start p-4 hover:border-blue-600`}
                 onClick={() => selectPlan("Arcade")}
               >
                 <Image
@@ -244,7 +268,7 @@ export default function Step(props) {
                   planType === "Advanced"
                     ? "border-blue-600 border-[2px]"
                     : "border-gray-400 border-[1px]"
-                } justify-start p-4`}
+                } justify-start p-4 hover:border-blue-600`}
                 onClick={() => selectPlan("Advanced")}
               >
                 <Image
@@ -276,7 +300,7 @@ export default function Step(props) {
                   planType === "Pro"
                     ? "border-blue-600 border-[2px]"
                     : "border-gray-400 border-[1px]"
-                } justify-start p-4`}
+                } justify-start p-4 hover:border-blue-600`}
                 onClick={() => selectPlan("Pro")}
               >
                 <Image
@@ -561,7 +585,9 @@ export default function Step(props) {
                 </g>
               </svg>
             </div>
-            <h className="text-3xl font-bold text-blue-900 mb-4">Thank you!</h>
+            <h1 className="text-3xl font-bold text-blue-900 mb-4">
+              Thank you!
+            </h1>
             <p className="text-slate-400 text-center w-[440px]">
               Thanks for confirming your subscription! We hope you have fun
               using our platform. If you ever need support, please feel free to
