@@ -4,7 +4,7 @@ import { FormProvider } from "./context/FormContext";
 export default function Home() {
   return (
     <FormProvider>
-      <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-cyan-100">
+      <main className="flex md:min-h-screen h-screen flex-col items-center justify-between md:p-24 bg-cyan-100">
         <div className="max-w-5xl w-full min-w-[300px] items-center  md:flex md:flex-col">
           <Form />
         </div>
