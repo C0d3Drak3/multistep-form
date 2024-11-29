@@ -158,7 +158,7 @@ export default function Step(props) {
   return (
     <div>
       {page === 1 ? (
-        <div className="flex flex-col w-[500px] h-[550px] border-0 text-blue-900  py-4 place-content-between">
+        <div className="flex flex-col md:w-[500px] w-[350px] h-[550px] border-0 text-blue-900  md:py-4 py-1 place-content-between">
           <div className="flex flex-col mt-4 ">
             <h1 className="text-3xl font-bold  ">Personal info</h1>
             <p className="text-lg text-gray-400 mt-1 ">
