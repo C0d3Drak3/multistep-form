@@ -175,7 +175,7 @@ export default function Form() {
           </div>
         </div>
 
-        <div className="absolute z-30 flex mt-[100px] justify-center items-center w-[400px] h-[600px] md:hidden bg-slate-50 rounded-lg">
+        <div className="absolute z-30 flex mt-[100px] justify-center items-center w-[360px] md:h-[600px] h-[450px] md:hidden bg-slate-50 rounded-lg shadow-lg">
           <Step />
         </div>
       </div>

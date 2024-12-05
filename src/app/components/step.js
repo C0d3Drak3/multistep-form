@@ -7,7 +7,7 @@ import Advanced from "../../../public/images/icon-advanced.svg";
 import Pro from "../../../public/images/icon-pro.svg";
 
 export default function Step(props) {
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(2);
   //monthly=1, and yearly=2 in the billing type
   const [billing, setBilling] = useState(1);
   const [planType, setPlanType] = useState(null); // Estado para el plan seleccionado
@@ -158,8 +158,8 @@ export default function Step(props) {
   return (
     <div>
       {page === 1 ? (
-        <div className="flex flex-col md:w-[500px] w-[350px] h-[550px] border-0 text-blue-900  md:py-4 py-1 place-content-between">
-          <div className="flex flex-col mt-4 ">
+        <div className="flex flex-col md:w-[500px] w-full md:h-[550px] h-[400px] border-0 text-blue-900  md:py-4 md:px-0 py-1 px-4 place-content-between">
+          <div className="flex flex-col mt-1 ">
             <h1 className="text-3xl font-bold  ">Personal info</h1>
             <p className="text-lg text-gray-400 mt-1 ">
               Please provide your name, email adress, and phone number.
@@ -212,7 +212,7 @@ export default function Step(props) {
               />
             </div>
           </div>
-          <div className="flex mt-8 w-full  place-content-end ">
+          <div className="md:flex hidden mt-8 w-full  place-content-end">
             <button
               onClick={toggleNext}
               className="bg-sky-900 rounded-md h-[50px] w-[120px] text-white font-medium"
@@ -220,25 +220,36 @@ export default function Step(props) {
               Next Step
             </button>
           </div>
+          {/* MODAL MOBILE FOR BUTTON */}
+          <div className="md:hidden flex items-center fixed  z-index bottom-0 left-0  w-screen h-[80px] bg-slate-50">
+            <div className="flex  m-5 w-full  place-content-end">
+              <button
+                onClick={toggleNext}
+                className="bg-sky-900 rounded-md h-[50px] w-[120px] text-white font-medium"
+              >
+                Next Step
+              </button>
+            </div>
+          </div>
         </div>
       ) : page === 2 ? (
-        <div className="flex flex-col w-[500px] h-[550px] border-0 text-blue-900  py-4 place-content-between">
-          <div className="flex flex-col mt-4 ">
+        <div className="flex flex-col md:w-[500px] w-full md:h-[550px] h-[400px] border-0 text-blue-900  md:py-4 md:px-0 py-0 px-4 place-content-between">
+          <div className="flex flex-col md:mt-4 mt-0 ">
             <h1 className="text-3xl font-bold  ">Select Your Plan</h1>
             <p className="text-lg text-gray-400 mt-1 ">
               You have the option of monthly or yearly billing.
             </p>
           </div>
           <div className="flex flex-col">
-            <div className="flex flex-row justify-between ">
+            <div className="flex md:flex-row flex-col justify-between ">
               <button
-                className={`w-[150px] ${
-                  billing == 2 ? "h-[200px]" : "h-[180px]"
-                } flex flex-col rounded-md  ${
+                className={`md:w-[150px] h-[85px] ${
+                  billing == 2 ? "md:h-[200px]" : "md:h-[180px]"
+                } flex md:flex-col flex-row rounded-md  ${
                   planType === "Arcade"
                     ? "border-blue-600 border-[2px]"
                     : "border-gray-400 border-[1px]"
-                } justify-start p-4 hover:border-blue-600`}
+                } justify-start md:items-start items-center md:p-4 p-1 mt-2 md:mt-0 hover:border-blue-600`}
                 onClick={() => selectPlan("Arcade")}
               >
                 <Image
@@ -246,29 +257,30 @@ export default function Step(props) {
                   alt="arcade"
                   width={55}
                   height={55}
-                  className="w-[50px] h-[50px]"
+                  className="w-[50px] h-[50px] md:mx-0 mx-2"
                 />
-
-                <p className="text-lg font-bold text-blue-900 mt-10 ">Arcade</p>
-                {billing == 2 ? (
-                  <div className="flex flex-col text-left">
-                    <p className="  text-gray-400">$90/yr</p>
-                    <p className=" font-medium   text-blue-900">
-                      2 months free
-                    </p>
-                  </div>
-                ) : (
-                  <p className="text-lg  text-gray-400">$9/mo</p>
-                )}
+                <div className="flex flex-col text-left md:mt-10 ">
+                  <p className="text-lg font-bold text-blue-900  ">Arcade</p>
+                  {billing == 2 ? (
+                    <div className="flex flex-col text-left">
+                      <p className="  text-gray-400">$90/yr</p>
+                      <p className=" font-medium   text-blue-900">
+                        2 months free
+                      </p>
+                    </div>
+                  ) : (
+                    <p className="text-lg  text-gray-400">$9/mo</p>
+                  )}
+                </div>
               </button>
               <button
-                className={`w-[150px] ${
-                  billing == 2 ? "h-[200px]" : "h-[180px]"
-                } flex flex-col rounded-md ${
+                className={`md:w-[150px] h-[85px] ${
+                  billing == 2 ? "md:h-[200px]" : "md:h-[180px]"
+                } flex md:flex-col flex-row rounded-md  ${
                   planType === "Advanced"
                     ? "border-blue-600 border-[2px]"
                     : "border-gray-400 border-[1px]"
-                } justify-start p-4 hover:border-blue-600`}
+                } justify-start md:items-start items-center md:p-4 p-1 mt-2 md:mt-0 hover:border-blue-600`}
                 onClick={() => selectPlan("Advanced")}
               >
                 <Image
@@ -276,31 +288,30 @@ export default function Step(props) {
                   alt="advanced"
                   width={55}
                   height={55}
-                  className="w-[50px] h-[50px]"
+                  className="w-[50px] h-[50px] md:mx-0 mx-2"
                 />
-
-                <p className="text-lg font-bold text-blue-900 mt-10 ">
-                  Advanced
-                </p>
-                {billing == 2 ? (
-                  <div className="flex flex-col text-left">
-                    <p className="  text-gray-400">$120/yr</p>
-                    <p className=" font-medium   text-blue-900">
-                      2 months free
-                    </p>
-                  </div>
-                ) : (
-                  <p className="text-lg  text-gray-400">$12/mo</p>
-                )}
+                <div className="flex flex-col text-left md:mt-10 ">
+                  <p className="text-lg font-bold text-blue-900 ">Advanced</p>
+                  {billing == 2 ? (
+                    <div className="flex flex-col text-left">
+                      <p className="  text-gray-400">$120/yr</p>
+                      <p className=" font-medium   text-blue-900">
+                        2 months free
+                      </p>
+                    </div>
+                  ) : (
+                    <p className="text-lg  text-gray-400">$12/mo</p>
+                  )}
+                </div>
               </button>
               <button
-                className={`w-[150px] ${
-                  billing == 2 ? "h-[200px]" : "h-[180px]"
-                } flex flex-col rounded-md ${
+                className={`md:w-[150px] h-[85px] ${
+                  billing == 2 ? "md:h-[200px]" : "md:h-[180px]"
+                } flex md:flex-col flex-row rounded-md  ${
                   planType === "Pro"
                     ? "border-blue-600 border-[2px]"
                     : "border-gray-400 border-[1px]"
-                } justify-start p-4 hover:border-blue-600`}
+                } justify-start md:items-start items-center md:p-4 p-1 mt-2 md:mt-0 hover:border-blue-600`}
                 onClick={() => selectPlan("Pro")}
               >
                 <Image
@@ -308,24 +319,31 @@ export default function Step(props) {
                   alt="pro"
                   width={55}
                   height={55}
-                  className="w-[50px] h-[50px]"
+                  className="w-[50px] h-[50px] md:mx-0 mx-2"
                 />
-
-                <p className="text-lg font-bold text-blue-900 mt-10 ">Pro</p>
-                {billing == 2 ? (
-                  <div className="flex flex-col text-left">
-                    <p className="  text-gray-400">$150/yr</p>
-                    <p className=" font-medium   text-blue-900">
-                      2 months free
-                    </p>
-                  </div>
-                ) : (
-                  <p className="text-lg  text-gray-400">$15/mo</p>
-                )}
+                <div className="flex flex-col text-left md:mt-10 ">
+                  <p className="text-lg font-bold text-blue-900">Pro</p>
+                  {billing == 2 ? (
+                    <div className="flex flex-col text-left">
+                      <p className="  text-gray-400">$150/yr</p>
+                      <p className=" font-medium   text-blue-900">
+                        2 months free
+                      </p>
+                    </div>
+                  ) : (
+                    <p className="text-lg  text-gray-400">$15/mo</p>
+                  )}
+                </div>
               </button>
             </div>
-            <div className="flex flex-row text-blue-900 font-bold mt-10 justify-center">
-              <p className="mx-5">Monthly</p>
+            <div className="flex flex-row font-bold md:mt-10 mt-3 justify-center">
+              <p
+                className={`mx-5 ${
+                  billing == 2 ? "text-gray-400" : "text-blue-900 "
+                } `}
+              >
+                Monthly
+              </p>
               <button
                 onClick={toggleBill}
                 className={` flex rounded-2xl bg-blue-900 w-[45px] h-[22px] p-[2px] ${
@@ -336,10 +354,16 @@ export default function Step(props) {
                   .
                 </div>
               </button>
-              <p className="mx-5">Yearly</p>
+              <p
+                className={`mx-5 ${
+                  billing == 2 ? "text-blue-900" : "text-gray-400"
+                } `}
+              >
+                Yearly
+              </p>
             </div>
           </div>
-          <div className="flex flex-row mt-8 w-full  justify-between ">
+          <div className=" md:flex hidden flex-row mt-8 w-full  justify-between ">
             <button onClick={toggleBack} className=" text-sky-900 font-medium">
               Go Back
             </button>
@@ -349,6 +373,23 @@ export default function Step(props) {
             >
               Next Step
             </button>
+          </div>
+          {/* MODAL MOBILE FOR BUTTON */}
+          <div className="md:hidden flex items-center fixed  z-index bottom-0 left-0  w-screen h-[80px] bg-slate-50">
+            <div className="flex  m-5 w-full  justify-between">
+              <button
+                onClick={toggleBack}
+                className=" text-sky-900 font-medium"
+              >
+                Go Back
+              </button>
+              <button
+                onClick={toggleNext}
+                className="bg-sky-900 rounded-md h-[50px] w-[120px] text-white font-medium"
+              >
+                Next Step
+              </button>
+            </div>
           </div>
         </div>
       ) : page === 3 ? (
