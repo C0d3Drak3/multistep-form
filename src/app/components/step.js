@@ -7,7 +7,7 @@ import Advanced from "../../../public/images/icon-advanced.svg";
 import Pro from "../../../public/images/icon-pro.svg";
 
 export default function Step(props) {
-  const [page, setPage] = useState(2);
+  const [page, setPage] = useState(1);
   //monthly=1, and yearly=2 in the billing type
   const [billing, setBilling] = useState(1);
   const [planType, setPlanType] = useState(null); // Estado para el plan seleccionado
@@ -393,17 +393,17 @@ export default function Step(props) {
           </div>
         </div>
       ) : page === 3 ? (
-        <div className="flex flex-col w-[500px] h-[550px] border-0 text-blue-900  py-4 place-content-between">
-          <div className="flex flex-col mt-4 ">
+        <div className="flex flex-col md:w-[500px] w-full md:h-[550px] h-[400px] border-0 text-blue-900  md:py-4 md:px-0 py-0 px-4 place-content-between">
+          <div className="flex flex-col md:mt-4 mt-0 ">
             <h1 className="text-3xl font-bold  ">Pick add-ons</h1>
             <p className="text-lg text-gray-400 mt-1 ">
               Add-ons help enhance tour gaming experience.
             </p>
           </div>
-          <div className="flex flex-col space-y-4">
+          <div className="flex flex-col md:space-y-4 space-y-6">
             <button
               onClick={toggleFill1}
-              className={`w-full h-[80px] flex flex-row rounded-md  ${
+              className={`w-full md:h-[80px] h-[70px] flex flex-row rounded-md  ${
                 isFilled1
                   ? "border-blue-600 border-[2px] "
                   : "border-gray-400 border-[1px] hover:border-blue-600 hover:border-[1px]"
@@ -426,9 +426,11 @@ export default function Step(props) {
                 />
               </svg>
               <div className="flex flex-row justify-between w-full text-gray-400 items-center">
-                <div className=" flex flex-col  text-left ml-4">
+                <div className=" flex flex-col  text-left md:ml-4 ml-2">
                   <p className="text-blue-900 font-semibold">Online service</p>
-                  <p>Access to multiplayer games</p>
+                  <p className=" md:text-base text-sm">
+                    Access to multiplayer games
+                  </p>
                 </div>
                 <p className="text-blue-600 font-medium">
                   {billing === 1 ? "+$1/mo" : "+$10/yr"}
@@ -437,7 +439,7 @@ export default function Step(props) {
             </button>
             <button
               onClick={toggleFill2}
-              className={`w-full h-[80px] flex flex-row rounded-md  ${
+              className={`w-full md:h-[80px] h-[70px] flex flex-row rounded-md  ${
                 isFilled2
                   ? "border-blue-600 border-[2px] "
                   : "border-gray-400 border-[1px] hover:border-blue-600 hover:border-[1px]"
@@ -460,9 +462,11 @@ export default function Step(props) {
                 />
               </svg>
               <div className="flex flex-row justify-between w-full text-gray-400 items-center">
-                <div className=" flex flex-col  text-left ml-4">
+                <div className=" flex flex-col  text-left md:ml-4 ml-2">
                   <p className="text-blue-900 font-semibold">Larger storage</p>
-                  <p>Extra 1TB of cloud save</p>
+                  <p className=" md:text-base text-sm">
+                    Extra 1TB of cloud save
+                  </p>
                 </div>
                 <p className="text-blue-600 font-medium">
                   {billing === 1 ? "+$2/mo" : "+$20/yr"}
@@ -471,7 +475,7 @@ export default function Step(props) {
             </button>
             <button
               onClick={toggleFill3}
-              className={`w-full h-[80px] flex flex-row rounded-md  ${
+              className={`w-full md:h-[80px] h-[70px] flex flex-row rounded-md  ${
                 isFilled3
                   ? "border-blue-600 border-[2px] "
                   : "border-gray-400 border-[1px] hover:border-blue-600 hover:border-[1px]"
@@ -494,11 +498,13 @@ export default function Step(props) {
                 />
               </svg>
               <div className="flex flex-row justify-between w-full text-gray-400 items-center">
-                <div className=" flex flex-col  text-left ml-4">
+                <div className=" flex flex-col  text-left md:ml-4 ml-2">
                   <p className="text-blue-900 font-semibold">
                     Customizable Profile
                   </p>
-                  <p>Custom theme on your profile</p>
+                  <p className=" md:text-base text-sm">
+                    Custom theme on your profile
+                  </p>
                 </div>
                 <p className="text-blue-600 font-medium">
                   {billing === 1 ? "+$2/mo" : "+$20/yr"}
@@ -507,7 +513,7 @@ export default function Step(props) {
             </button>
           </div>
 
-          <div className="flex flex-row mt-8 w-full  justify-between ">
+          <div className="md:flex hidden flex-row mt-8 w-full  justify-between ">
             <button onClick={toggleBack} className=" text-sky-900 font-medium">
               Go Back
             </button>
@@ -518,22 +524,41 @@ export default function Step(props) {
               Next Step
             </button>
           </div>
+          {/* MODAL MOBILE FOR BUTTON */}
+          <div className="md:hidden flex items-center fixed  z-index bottom-0 left-0  w-screen h-[80px] bg-slate-50">
+            <div className="flex  m-5 w-full  justify-between">
+              <button
+                onClick={toggleBack}
+                className=" text-sky-900 font-medium"
+              >
+                Go Back
+              </button>
+              <button
+                onClick={toggleNext}
+                className="bg-sky-900 rounded-md h-[50px] w-[120px] text-white font-medium"
+              >
+                Next Step
+              </button>
+            </div>
+          </div>
         </div>
       ) : page === 4 ? (
-        <div className="flex flex-col w-[500px] h-[550px] border-0 text-blue-900  py-4 place-content-between">
-          <div className="flex flex-col mt-4 ">
+        <div className="flex flex-col md:w-[500px] w-full md:h-[550px] h-[400px] border-0 text-blue-900  md:py-4 md:px-0 py-0 px-4 place-content-between">
+          <div className="flex flex-col md:mt-4 mt-0 ">
             <h1 className="text-3xl font-bold  ">Finishing up</h1>
             <p className="text-lg text-gray-400 mt-1 ">
               Double-check everything looks OK before confirming.
             </p>
           </div>
-          <div className="flex flex-col ">
-            <div className="flex flex-row align-middle justify-between">
+          <div className="flex flex-col p-6">
+            <div className="flex flex-row align-middle justify-between md:mb-0 mb-3">
               <div>
                 <h2 className="text-xl font-bold">
                   {planType} {billing === 1 ? "(Monthly)" : "(Yearly)"}
                 </h2>
-                <button onClick={toggleBill}>Change</button>
+                <button onClick={toggleBill} className=" underline">
+                  Change
+                </button>
               </div>
               <p className="text-lg font-bold">
                 {planType === "Arcade"
@@ -551,7 +576,7 @@ export default function Step(props) {
             </div>
             <hr></hr>
 
-            <div className="flex flex-col">
+            <div className="flex flex-col md:mt-0 mt-3">
               {addOnes.map(
                 (addOn, index) =>
                   addOns[index] && (
@@ -570,7 +595,7 @@ export default function Step(props) {
                   )
               )}
             </div>
-            <div className="flex flex-row justify-between mt-5">
+            <div className="flex flex-row justify-between mt-8">
               <p className="text-gray-400">
                 Total {billing === 1 ? "(per month)" : "(per year)"}
               </p>
@@ -591,7 +616,7 @@ export default function Step(props) {
               </p>
             </div>
           </div>
-          <div className="flex flex-row mt-8 w-full  justify-between ">
+          <div className="md:flex hidden flex-row mt-8 w-full  justify-between ">
             <button onClick={toggleBack} className=" text-sky-900 font-medium">
               Go Back
             </button>
@@ -602,9 +627,26 @@ export default function Step(props) {
               Confirm
             </button>
           </div>
+          {/* MODAL MOBILE FOR BUTTON */}
+          <div className="md:hidden flex items-center fixed  z-index bottom-0 left-0  w-screen h-[80px] bg-slate-50">
+            <div className="flex  m-5 w-full  justify-between">
+              <button
+                onClick={toggleBack}
+                className=" text-sky-900 font-medium"
+              >
+                Go Back
+              </button>
+              <button
+                onClick={toggleNext}
+                className="bg-sky-900 rounded-md h-[50px] w-[120px] text-white font-medium"
+              >
+                Confirm
+              </button>
+            </div>
+          </div>
         </div>
       ) : (
-        <div className="flex w-[500px] h-[550px] border-0 text-blue-900">
+        <div className="flex md:w-[500px] w-full md:h-[550px] h-[400px] border-0 text-blue-900">
           <div className="flex flex-col w-full h-full items-center justify-center">
             <div className="flex mb-7">
               <svg
@@ -629,7 +671,7 @@ export default function Step(props) {
             <h1 className="text-3xl font-bold text-blue-900 mb-4">
               Thank you!
             </h1>
-            <p className="text-slate-400 text-center w-[440px]">
+            <p className="text-slate-400 text-center md:w-[440px] w-[300px]">
               Thanks for confirming your subscription! We hope you have fun
               using our platform. If you ever need support, please feel free to
               email us at support@loremgaming.com
