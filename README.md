@@ -40,8 +40,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [Frontend Mentor Solution](https://www.frontendmentor.io/solutions/multi-step-form-with-tailwind-react-next-UNYQFn3xwG)
+- Live Site URL: [Vercel Deploy](https://multistep-form-six-delta.vercel.app/)
 
 ## My process
 
